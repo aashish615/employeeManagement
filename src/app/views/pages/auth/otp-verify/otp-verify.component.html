@@ -1,0 +1,29 @@
+<!--begin::Body-->
+<div class="kt-login__body">
+	<!--begin::Signin-->
+	<div class="kt-login__form">
+		<kt-auth-notice></kt-auth-notice>
+		<div class="container">
+			<h2>Verify Your Account</h2>
+			<p>We emailed you the six digit code to {{$email}} <br/> Enter the code below to confirm your email address.</p>
+			<div class="code-container">
+			  <input type="number" [(ngModel)]="code.one"  class="code" placeholder="0" min="0" max="1" required>
+			  <input type="number" [(ngModel)]="code.two"  class="code" placeholder="0" min="0" max="1" required>
+			  <input type="number" [(ngModel)]="code.three"  class="code" placeholder="0" min="0" max="1" required>
+			  <input type="number" [(ngModel)]="code.four"  class="code" placeholder="0" min="0" max="1" required>
+			  <input type="number" [(ngModel)]="code.five"  class="code" placeholder="0" min="0" max="1" required>
+ 			</div>
+			<small class="info">
+			  This is design only. We didn't actually send you an email as we don't have your email, right?
+			</small>
+		  </div>
+		  <div>
+			<div class="kt-login__actions">
+				<a href="javascript:;" (click)="resendOtp()" class="kt-link kt-login__link-forgot">
+					Resent OTP
+				</a>
+				<button type="button" (click)="submit()" id="kt_login_signin_submit" class="btn btn-primary btn-elevate kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">{{ 'AUTH.GENERAL.SUBMIT_BUTTON' | translate }}</button>
+			</div>
+		  </div>
+	</div>
+</div>
