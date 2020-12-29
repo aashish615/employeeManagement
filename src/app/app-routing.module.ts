@@ -20,6 +20,10 @@ const routes: Routes = [
 				loadChildren: () => import('app/views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
 			},
 			{
+				path:'profile',
+				loadChildren :()=> import('app/views/pages/profile/profile.module').then(m=>m.ProfileModule)
+			},
+			{
 				path: 'mail',
 				loadChildren: () => import('app/views/pages/apps/mail/mail.module').then(m => m.MailModule),
 			},
@@ -58,8 +62,8 @@ const routes: Routes = [
 				},
 			},
 			{path: 'error/:type', component: ErrorPageComponent},
-			{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-			{path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
+			// {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+			// {path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
 		],
 	},
 

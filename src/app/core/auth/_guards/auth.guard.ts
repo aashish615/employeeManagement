@@ -1,3 +1,4 @@
+import { SecureService } from './../../_service/secure.service';
 // Angular
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
@@ -12,17 +13,18 @@ import { isLoggedIn } from '../_selectors/auth.selectors';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private store: Store<AppState>, private router: Router) { }
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>  {
-        return this.store
-            .pipe(
-                select(isLoggedIn),
-                tap(loggedIn => {
-                    if (!loggedIn) {
-                        this.router.navigateByUrl('/auth/login');
-                    }
-                })
-            );
-    }
+	constructor(private store: Store<AppState>, private router: Router,
+		private secureService:SecureService) { }
+	canActivate(
+		next: ActivatedRouteSnapshot, state: RouterStateSnapshot
+	  ) {
+		let user: any = this.secureService.getSecureData('user') && JSON.parse(this.secureService.getSecureData('user'));
+		if (user) {
+		  this.router.navigate(['/dashboard']);
+		  return false;
+ 		}   else {
+			this.router.navigate(['/auth/login']);
+			return false;
+ 		}
+	  }
 }

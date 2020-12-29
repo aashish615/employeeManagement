@@ -1,6 +1,6 @@
 import { AuthNoticeService } from './../../../../core/auth/auth-notice/auth-notice.service';
 import { AuthenticationService } from './../auth.service';
- import { ActivatedRoute } from '@angular/router';
+ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
  // declare let $: any;
 
@@ -17,6 +17,7 @@ export class OtpVerifyComponent implements OnInit {
 	  private route:ActivatedRoute,
 	  private authService:AuthenticationService,
 	  private authNoticeService: AuthNoticeService,
+	  private router:Router
 	  ) {
 
 		this.route.params.forEach((params) => {
@@ -41,7 +42,8 @@ export class OtpVerifyComponent implements OnInit {
 
 		  this.authService.otpVerify(this.$email,otpcode).subscribe((res:any)=>{
 			this.authNoticeService.setNotice("Done", 'success');
- 			this.loading = false;
+			 this.loading = false;
+			 this.router.navigate(['/auth/login'])
 		},rej=>{
 			console.log("Rej",rej);
 

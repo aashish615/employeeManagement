@@ -1,24 +1,22 @@
-<div ngbDropdown placement="bottom-right" *ngIf="user$ | async as _user" class="kt-header__topbar-item kt-header__topbar-item--user">
+<div ngbDropdown placement="bottom-right"  class="kt-header__topbar-item kt-header__topbar-item--user">
 	<div ngbDropdownToggle class="kt-header__topbar-wrapper">
 		<div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
-			<span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="greeting">Hi,</span>
-			<span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{_user.fullname}}</span>
-			<i *ngIf="icon" class="flaticon2-user-outline-symbol"></i>
-			<img *ngIf="avatar" alt="Pic" [attr.src]="_user.pic">
-			<span *ngIf="badge" class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{_user.fullname|firstLetter}}</span>
+			<span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
+			<span class="kt-header__topbar-username kt-hidden-mobile">Ashish</span>
+ 			<img  alt="Pic" src="https://preview.keenthemes.com/metronic/angular/demo1/assets/media/users/300_21.jpg">
 		</div>
 	</div>
 	<div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
 		<!--begin: Head -->
 		<div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image: url(./assets/media/misc/bg-1.jpg)">
 			<div class="kt-user-card__avatar">
-				<img alt="Pic" [attr.src]="_user.pic"/>
+				<img  alt="Pic" src="https://preview.keenthemes.com/metronic/angular/demo1/assets/media/users/300_21.jpg">
 				<span [hidden]="true" class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">
-					{{_user.fullname|firstLetter}}
+					full name first letter
 				</span>
 			</div>
 			<div class="kt-user-card__name">
-				{{_user.fullname}}
+			Ashish
 			</div>
 			<div class="kt-user-card__badge">
 				<span class="btn btn-success btn-sm btn-bold btn-font-md">23 messages</span>
@@ -33,8 +31,11 @@
 					<i class="flaticon2-calendar-3 kt-font-success"></i>
 				</div>
 				<div class="kt-notification__item-details">
-					<div class="kt-notification__item-title kt-font-bold">
-						My Profile
+					<div class="kt-notification__item-title kt-font-bold"  >
+						<a [routerLink]="['/profile/info']" routerLinkActive="router-link-active">
+							My Profile
+						</a>
+
 					</div>
 					<div class="kt-notification__item-time">
 						Account settings and more
@@ -91,7 +92,7 @@
 			<li class="kt-nav__item">
 				<a ngbDropdownItem routerLink="profile" class="kt-nav__link">
 					<span class="kt-nav__link-icon"><i class="flaticon2-calendar-3"></i></span>
-					<span class="kt-nav__link-text">My Profile</span>
+					<span class="kt-nav__link-text">My Profile 1</span>
 				</a>
 			</li>
 			<li class="kt-nav__item">

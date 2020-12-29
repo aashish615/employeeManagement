@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { SecureService } from './../../../../../core/_service/secure.service';
 // Angular
 import { Component, Input, OnInit } from '@angular/core';
 // RxJS
@@ -26,7 +28,9 @@ export class UserProfileComponent implements OnInit {
 	 *
 	 * @param store: Store<AppState>
 	 */
-	constructor(private store: Store<AppState>) {
+	constructor(private store: Store<AppState>,
+		private router:Router,
+		private secureService:SecureService) {
 	}
 
 	/**
@@ -37,13 +41,16 @@ export class UserProfileComponent implements OnInit {
 	 * On init
 	 */
 	ngOnInit(): void {
-		this.user$ = this.store.pipe(select(currentUser));
+		// this.user$ = this.store.pipe(select(currentUser));
 	}
 
 	/**
 	 * Log out
 	 */
 	logout() {
-		this.store.dispatch(new Logout());
+		// this.store.dispatch(new Logout());
+
+		this.secureService.clearSecureData();
+		this.router.navigate(['./auth/login'])
 	}
 }

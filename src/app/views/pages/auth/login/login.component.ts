@@ -1,3 +1,4 @@
+import { SecureService } from './../../../../core/_service/secure.service';
 // Angular
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,7 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private fb: FormBuilder,
 		private cdr: ChangeDetectorRef,
 		private route: ActivatedRoute,
-		private authService:AuthenticationService
+		private authService:AuthenticationService,
+		private secureService:SecureService
 	) {
 		this.unsubscribe = new Subject();
 	}
@@ -144,10 +146,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		this.authService.login(authData).subscribe((res:any)=>{
 			this.authNoticeService.setNotice(this.translate.instant('AUTH.REGISTER.SUCCESS'), 'success');
- 						this.router.navigateByUrl(this.returnUrl); // Main page
-
-			this.loading = false;
+ 			if(res.token){
+				this.secureService.setSecureData('token', res.token);
+				// this.secureService.setSecureData('user', JSON.stringify(res.data.claims));
+				this.secureService.setSecureData('user', JSON.stringify({ ...res.user }));
+			 this.router.navigate(['/dashboard']); // Main page
+			 this.loading = false;
 			this.cdr.markForCheck();
+			}
+
 
 		},rej=>{
 						this.authNoticeService.setNotice(rej.error.message, 'danger');
